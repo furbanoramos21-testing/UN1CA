@@ -50,3 +50,8 @@ ADD_TO_WORK_DIR "$TARGET_FIRMWARE" "system" "system/lib64/libfmradio_jni.so" 0 0
 # MultiFrameProcessing10 blob for camera
 ADD_TO_WORK_DIR "a14nsxx" "system" "system/lib64/libMultiFrameProcessing10.camera.samsung.so" 0 0 644 "u:object_r:system_lib_file:s0"
 EVAL "echo \"libMultiFrameProcessing10.camera.samsung.so\" >> \"$WORK_DIR/system/system/etc/public.libraries-camera.samsung.txt\""
+
+# Snap
+if [[ "$TARGET_BOARD_API_LEVEL" == "33" ]]; then
+    ADD_TO_WORK_DIR "a14xub" "vendor" "lib64/libsnaplite_native.so" 0 0 644 "u:object_r:same_process_hal_file:s0"
+fi
