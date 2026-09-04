@@ -51,3 +51,6 @@ ADD_TO_WORK_DIR "$TARGET_FIRMWARE" "system" "system/lib64/libfmradio_jni.so" 0 0
 if [[ "$TARGET_BOARD_API_LEVEL" == "33" ]]; then
     ADD_TO_WORK_DIR "a14xub" "vendor" "lib64/libsnaplite_native.so" 0 0 644 "u:object_r:same_process_hal_file:s0"
 fi
+
+# Add VlsMesDetector blobs
+ADD_TO_WORK_DIR "$SOURCE_FIRMWARE" "vendor" "etc/VslMesDetector" 0 2000 755 "u:object_r:vendor_configs_file:s0"
