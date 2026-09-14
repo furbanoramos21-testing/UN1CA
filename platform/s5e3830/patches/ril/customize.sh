@@ -97,6 +97,29 @@ if [ "$TARGET_PLATFORM_SDK_VERSION" -lt "34" ]; then
             echo "(allow vendor_init_33_0 telephony_prop (property_service (set)))"
         } >> "$WORK_DIR/vendor/etc/selinux/vendor_sepolicy.cil"
     fi
+    
+    # Add Samsung Radio AIDL services to vendor_service_contexts on vndk31 devices
+    if [[ "$TARGET_BOARD_API_LEVEL" == "31" ]]; then
+        VND_CTX="$WORK_DIR/vendor/etc/selinux/vendor_service_contexts"
+        echo "" >> "$VND_CTX"
+        echo "# Samsung Radio AIDL Services Contexts Mappings" >> "$VND_CTX"
+        echo "vendor.samsung.hardware.radio.network.ISehRadioNetwork/slot1      u:object_r:hal_radio_service:s0" >> "$VND_CTX"
+        echo "vendor.samsung.hardware.radio.network.ISehRadioNetwork/slot2      u:object_r:hal_radio_service:s0" >> "$VND_CTX"
+        echo "vendor.samsung.hardware.radio.bridge.ISehRadioBridge/slot1        u:object_r:hal_radio_service:s0" >> "$VND_CTX"
+        echo "vendor.samsung.hardware.radio.bridge.ISehRadioBridge/slot2        u:object_r:hal_radio_service:s0" >> "$VND_CTX"
+        echo "vendor.samsung.hardware.radio.channel.ISehRadioChannel/imsd       u:object_r:hal_radio_service:s0" >> "$VND_CTX"
+        echo "vendor.samsung.hardware.radio.channel.ISehRadioChannel/imsd2      u:object_r:hal_radio_service:s0" >> "$VND_CTX"
+        echo "vendor.samsung.hardware.radio.channel.ISehRadioChannel/epdgd      u:object_r:hal_radio_service:s0" >> "$VND_CTX"
+        echo "vendor.samsung.hardware.radio.channel.ISehRadioChannel/epdgd2     u:object_r:hal_radio_service:s0" >> "$VND_CTX"
+        echo "vendor.samsung.hardware.radio.data.ISehRadioData/slot1            u:object_r:hal_radio_service:s0" >> "$VND_CTX"
+        echo "vendor.samsung.hardware.radio.data.ISehRadioData/slot2            u:object_r:hal_radio_service:s0" >> "$VND_CTX"
+        echo "vendor.samsung.hardware.radio.sim.ISehRadioSim/slot1              u:object_r:hal_radio_service:s0" >> "$VND_CTX"
+        echo "vendor.samsung.hardware.radio.sim.ISehRadioSim/slot2              u:object_r:hal_radio_service:s0" >> "$VND_CTX"
+        echo "vendor.samsung.hardware.radio.messaging.ISehRadioMessaging/slot1  u:object_r:hal_radio_service:s0" >> "$VND_CTX"
+        echo "vendor.samsung.hardware.radio.messaging.ISehRadioMessaging/slot2  u:object_r:hal_radio_service:s0" >> "$VND_CTX"
+        unset VND_CTX
+    fi
+
 else
     LOG "\033[0;33m! Nothing to do\033[0m"
     return 0
