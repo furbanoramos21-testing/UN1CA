@@ -2,7 +2,7 @@ SOURCE_FIRMWARE_PATH="$(cut -d "/" -f 1 -s <<< "$SOURCE_FIRMWARE")_$(cut -d "/" 
 TARGET_FIRMWARE_PATH="$(cut -d "/" -f 1 -s <<< "$TARGET_FIRMWARE")_$(cut -d "/" -f 2 -s <<< "$TARGET_FIRMWARE")"
 
 SOURCE_HAS_CLOCKPACK="$(test -d "$FW_DIR/$SOURCE_FIRMWARE_PATH/system/system/priv-app/ClockPack_v80" && echo "true" || echo "false")"
-TARGET_HAS_CLOCKPACK="$(test -d "$FW_DIR/$TARGET_FIRMWARE_PATH/system/system/priv-app/ClockPack_v80" && echo "true" || echo "false")"
+TARGET_HAS_CLOCKPACK="$(test -f "$FW_DIR/$TARGET_FIRMWARE_PATH/system/system/etc/permissions/privapp-permissions-com.samsung.android.app.clockpack.xml" && echo "true" || echo "false")"
 
 if ! $SOURCE_HAS_CLOCKPACK; then
     if $TARGET_HAS_CLOCKPACK; then
