@@ -1,0 +1,4 @@
+id=selinux
+name=Update SELinux policy for a21s vendor
+author=furbanoramos21
+description=Modifies selinux policy .cil files from vendor partition to avoid conflicts with One UI 8 requirements.
