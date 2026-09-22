@@ -1,0 +1,3 @@
+LOG "- Patching /vendor/etc/fstab.exynos850"
+EVAL "sed -i \"/[[:space:]]\/data[[:space:]]/ s|usrquota,grpquota,fsync_mode=nobarrier,reserve_root=32768,resgid=5678|reserve_root=32768,resgid=1065,fsync_mode=nobarrier,inlinecrypt|g\" \"$WORK_DIR/vendor/etc/fstab.exynos850\""
+EVAL "sed -i \"/[[:space:]]\/data[[:space:]]/ s|fileencryption=ice,quota,reservedsize=128M,checkpoint=fs|quota,formattable,checkpoint=fs,fileencryption=aes-256-xts:aes-256-cts:v2+inlinecrypt_optimized,metadata_encryption=aes-256-xts,keydirectory=/metadata/vold/metadata_encryption,fscompress,readahead_size_kb=128|g\" \"$WORK_DIR/vendor/etc/fstab.exynos850\""
