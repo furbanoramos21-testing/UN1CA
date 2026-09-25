@@ -45,7 +45,6 @@ if [ "$TARGET_PLATFORM_SDK_VERSION" -lt "34" ]; then
     lib64/android.hardware.radio-V1-ndk.so
     lib64/android.hardware.radio.voice-V1-ndk.so
     lib64/libprotobuf-cpp-full-21.7.so
-    lib64/libprotobuf-cpp-lite-21.7.so
     lib64/libril_sem.so
     lib64/libsec-ril.so
     lib64/libSemDataProps.so
@@ -59,7 +58,16 @@ if [ "$TARGET_PLATFORM_SDK_VERSION" -lt "34" ]; then
     lib64/vendor.samsung.hardware.radio-V1-ndk.so
     "
     if [[ "$TARGET_BOARD_API_LEVEL" == "31" ]]; then
-    LIBS_LIST+="lib64/android.system.keystore2-V1-ndk.so"
+        LIBS_LIST+="lib64/android.system.keystore2-V1-ndk.so"
+    elif [[ "$TARGET_BOARD_API_LEVEL" == "33" ]]; then
+        LIBS_LIST+="
+        lib64/android.hardware.radio@1.0.so
+        lib64/android.hardware.radio@1.1.so
+        lib64/android.hardware.radio@1.2.so
+        lib64/libprotobuf-cpp-lite-21.7.so
+        lib64/librilutils.so
+        lib64/libsecril-client.so
+        "
     fi
 
     for lib in $LIBS_LIST; do
