@@ -1,0 +1,8 @@
+LOG "-Disabling encryption"
+# Encryption
+LINE=$(sed -n "/^\/dev\/block\/by-name\/userdata/=" "$WORK_DIR/vendor/etc/fstab.exynos850")
+sed -i "${LINE}s/,fileencryption=ice//g" "$WORK_DIR/vendor/etc/fstab.exynos850"
+
+LOG_STEP_IN "- Disabling A2DP Offload"
+SET_PROP "system" persist.bluetooth.a2dp_offload.disabled "true"
+LOG_STEP_OUT
